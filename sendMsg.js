@@ -7,7 +7,7 @@ async function sendmsg(text) {
     if(sckey) await server(text);
     if(qmsgkey) await qmsg(text);
     if(pushplustoken) await pushplus(text);
-    if(corpsecret) await wx(text); 
+    if(corpsecret) await wx(text);
     if(tgbotoken)await tgpush(text)
 }
 
@@ -60,8 +60,6 @@ function pushplus(msg) {
     });
 }
 
-
-
 function qmsg(msg) {
     return new Promise(async (resolve) => {
         try {
@@ -69,11 +67,11 @@ function qmsg(msg) {
                 res = await axios.post(url, `msg=${encodeURI(msg)}`);
                 if (res.data.success) {
                     console.log("qmsg酱:发送成功");
-                } else { 
+                } else {
                     console.log("qmsg酱:发送失败 "+res.data.resson);
-                    
+
                 }nsole.log("qmsg酱:你还没有填写qmsg酱推送key呢，推送个鸡腿");
-            
+
         } catch (err) {
             console.log("qmsg酱:发送接口调用失败");
             console.log(err);
@@ -81,8 +79,6 @@ function qmsg(msg) {
         resolve();
     });
 }
-
-
 
 function tgpush(msg) {
     return new Promise(async (resolve) => {
@@ -120,7 +116,7 @@ function wx(msg) {
                     },
                     "safe": 0
                 }
-                
+
                 let mpnews = {
                     "touser": "@all",
                     "msgtype": "mpnews",
@@ -128,7 +124,7 @@ function wx(msg) {
                     "mpnews": {
        "articles":[
            {
-               "title": "签到盒每日任务已完成", 
+               "title": "签到盒每日任务已完成",
                "thumb_media_id": mediaid?mediaid:"",
                "author": "wenmoux",
                "content_source_url": "",

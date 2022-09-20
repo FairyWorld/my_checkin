@@ -1,25 +1,45 @@
 /*
 cron: 0 9 * * *
+
+配置:
+- config.yml移动到ql/config/xx仓库/config.yml
+- 或者拉库后, 拷贝一份到当前目录, 并且给拉库命令加上config.yml的白名单
 */
 
 const fs = require("fs");
-const config = require("./config.json");
+const yaml = require("js-yaml");
 
-let sendMsg = null,
+let config = null,
+  taskList = [],
+  sendMsg = null,
   notify = null,
-  logs = "",
-  needPush = true;
+  logs = "";
+
+if (fs.existsSync("./config.yml")) {
+  config = yaml.load(fs.readFileSync("./config.yml", "utf8"));
+} else {
+  console.log("无法找到配置文件");
+  return;
+}
 
 // 动态引入库, sendMsg是我们的通知, sendNotify.js是青龙拉库后自动添加进来的
 if (config.sendMsg) {
   sendMsg = require("./sendMsg");
-} else if (config.sendNotify && process.env.QL_DIR && fs.existsSync("./sendNotify")) {
+} else if (
+  config.sendNotify &&
+  process.env.QL_DIR &&
+  fs.existsSync("./sendNotify")
+) {
   notify = require("./sendNotify");
 }
 
 async function start() {
-  if (config.taskList.length) {
+  if (config.taskList && config.taskList.split("&")) {
+    taskList = config.taskList.split("&");
     sign(taskList);
+  } else {
+    console.log("暂无可执行任务");
+    return;
   }
 }
 
@@ -43,10 +63,10 @@ function sign(taskList) {
         }
       }
       console.log("------------任务执行完毕------------\n");
-      if (config.sendMsg){
-        await sendmsg(logs);
-      } 
-      if (config.sendNotify){
+      if (config.sendMsg) {
+        await sendMsg(logs);
+      }
+      if (config.sendNotify) {
         await notify.sendNotify("我的签到", `${logs}\n\n`);
       }
     } catch (err) {
