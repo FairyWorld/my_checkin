@@ -19,7 +19,7 @@ const yargs = require("yargs");
 if (QL) {
   config = yaml.load(
     fs.readFileSync(
-      `/${QL}/data/config/fairyworld_my_checkin/config.yml`,
+      `/${QL}/data/config/FairyWorld_my_checkin/config.yml`,
       "utf8"
     )
   );
