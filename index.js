@@ -46,7 +46,7 @@ async function start() {
   if (argv._.length) {
     taskList = argv._;
     sign(taskList);
-  } else if (config.taskList && config.taskList.split("&")) {
+  } else if (config.taskList) {
     taskList = config.taskList;
     sign(taskList);
   } else {
