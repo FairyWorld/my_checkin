@@ -1,5 +1,6 @@
 /*
-cron: 0 9 * * *
+cron: 2 9 * * *
+new Env('my_checkin任务')
 */
 
 const fs = require("fs");
