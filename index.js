@@ -47,7 +47,7 @@ async function start() {
     taskList = argv._;
     sign(taskList);
   } else if (config.taskList && config.taskList.split("&")) {
-    taskList = config.taskList.split("&");
+    taskList = config.taskList;
     sign(taskList);
   } else {
     console.log("暂无可执行任务");

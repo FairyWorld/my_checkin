@@ -32,9 +32,10 @@ sendMsg: false
 
 sendNotify: false
 
-#任务列表 任务1&任务2
-taskList: dbmxb
+#任务列表
+taskList:
+  - dbmxb
 
-#什么值得买网页端 全部cookie
+#东北魔仙堡网页端 全部cookie
 dbmxb:
   cookie:
