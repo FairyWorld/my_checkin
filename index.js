@@ -8,14 +8,22 @@ const yaml = require("js-yaml");
 const yargs = require("yargs");
 
 // 全局变量
-argv = yargs.argv,
-  config = null,
-  taskList = [],
-  sendMsg = null,
-  notify = null,
-  logs = "";
+(QL = process.env.QL_DIR),
+  (argv = yargs.argv),
+  (config = null),
+  (taskList = []),
+  (sendMsg = null),
+  (notify = null),
+  (logs = "");
 
-if (fs.existsSync("./config.yml")) {
+if (QL) {
+  config = yaml.load(
+    fs.readFileSync(
+      `/${QL}/data/config/fairyworld_my_checkin/config.yml`,
+      "utf8"
+    )
+  );
+} else if (fs.existsSync("./config.yml")) {
   config = yaml.load(fs.readFileSync("./config.yml", "utf8"));
 } else {
   console.log("无法找到配置文件");
