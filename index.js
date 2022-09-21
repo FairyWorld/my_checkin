@@ -1,15 +1,14 @@
 /*
 cron: 0 9 * * *
-
-配置:
-- config.yml移动到ql/config/xx仓库/config.yml
-- 或者拉库后, 拷贝一份到当前目录, 并且给拉库命令加上config.yml的白名单
 */
 
 const fs = require("fs");
 const yaml = require("js-yaml");
+const yargs = require("yargs");
 
-let config = null,
+// 全局变量
+argv = yargs.argv,
+  config = null,
   taskList = [],
   sendMsg = null,
   notify = null,
@@ -34,7 +33,11 @@ if (config.sendMsg) {
 }
 
 async function start() {
-  if (config.taskList && config.taskList.split("&")) {
+  // 终端指定的任务优先
+  if (argv._.length) {
+    taskList = argv._;
+    sign(taskList);
+  } else if (config.taskList && config.taskList.split("&")) {
     taskList = config.taskList.split("&");
     sign(taskList);
   } else {

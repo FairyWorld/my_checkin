@@ -1,10 +1,7 @@
 // 东北魔仙堡
 const axios = require("axios");
-const yaml = require("js-yaml");
-const fs = require("fs");
 
 function dbmxb() {
-  const config = yaml.load(fs.readFileSync("./config.yml", "utf8"));
   return new Promise(async (resolve) => {
     try {
       let url = "http://dbmxb.top/wp-admin/admin-ajax.php";
