@@ -50,7 +50,7 @@ ql repo https://github.com/FairyWorld/my_checkin.git "index|install|sendMsg" "" 
 > 1 首先在青龙目录下 config.sh 设置里拉取 sh 后缀文件 大概这个自己找 RepoFileExtensions = xxx 这一行 里边加上 sh 就可以了  
 >  2 在面板内添加定时任务 (上面 ql repo 那条 定时看你)  
 >  3 手动运行 my_checkin 安装任务 无需禁用  
->  4 在`ql/data/config/FairyWorld_my_checkin/config.yml`里填写 cookie 以及需要运行的任务列表(开头 taskList)等信息
+>  4 在`ql/data/config/FairyWorld_my_checkin_main/config.yml`里填写 cookie 以及需要运行的任务列表(开头 taskList)等信息
 
 # 致谢
 
